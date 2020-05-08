@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link type="text/css" rel="stylesheet"
+	href="static/css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+<title>Recipy list</title>
+</head>
+<body>
+	<h1>Recipies</h1>
+	<div class="col-md-4">
+		<h3 th:inline="text">Welcome
+			[[${#httpServletRequest.remoteUser}]]</h3>
+	</div>
+	<div class="col-md-4" style="padding: 20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger" />
+		</form>
+	</div>
+
+	<table class="table table-striped">
+		<tr>
+		
+			<th>Title</th>
+			<th>Ingredients</th>
+			<th>Description</th>
+			<th>Instruction</th>
+		</tr>
+		<tr th:each="recipy : ${recipies}">
+			<td th:text="${recipy.title} "></td>
+			<td th:text="${recipy.ingredients}"></td>
+			<td th:text="${recipy.description}"></td>
+			<td th:text="${recipy.instruction}"></td>
+			<td th:text="${recipy.category.name}"></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a
+				th:href="@{/delete/{id}(id=${recipy.id})}" class="btn btn-danger">Delete</a>
+			</td>
+			<td ><a th:href="@{/edit/{id}(id=${recipy.id})}" class="btn btn-success">Edit</a>
+			</td>
+
+		</tr>
+	</table>
+	<a href="/add" class="btn btn-success">Add Recipy</a>
+
+</body>
+</html>
