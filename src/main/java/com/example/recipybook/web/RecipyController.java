@@ -24,12 +24,13 @@ public class RecipyController {
 	@Autowired
 	private CategoryRepository crepository;
 	
-	// Show all students
+	//login page
     @RequestMapping(value="/login")
     public String login() {	
         return "login";
     }	
-	
+    
+    //page with the list of recipes
 	@RequestMapping(value = "/recipyList", method = RequestMethod.GET)
 	public String recipyList(Model model) {
 		model.addAttribute("recipies", repository.findAll());
@@ -37,17 +38,20 @@ public class RecipyController {
 
 	}
 	
+	//Rest API end point with recipes
 	@RequestMapping(value="/recipies", method = RequestMethod.GET)
 	public @ResponseBody List<Recipy> recipyListRest(){
 		return (List<Recipy>) repository.findAll();
 	} 
 	
+
+	//Rest API end point with concrete recipe
 	@RequestMapping(value="/recipy/{id}", method = RequestMethod.GET)
     public @ResponseBody Optional<Recipy> findRecipyRest(@PathVariable("id") Long recipyId) {	
     	return repository.findById(recipyId);
     }
 	
-	
+	//Add page where you can add new recipe
 	@RequestMapping(value = "/add")
     public String addBook(Model model){
     	model.addAttribute("recipy", new Recipy());
@@ -55,12 +59,14 @@ public class RecipyController {
         return "addRecipy";
     }     
     
+	//Function that allows to save recipe
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(Recipy recipy){
         repository.save(recipy);
         return "redirect:recipyList";
     }    
-
+    
+    //Function that allows to delete recipe
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     @PreAuthorize("hasAuthority('ADMIN')")
     public String deleteRecipy(@PathVariable("id") Long recipyId, Model model) {
@@ -68,6 +74,7 @@ public class RecipyController {
         return "redirect:../recipyList";
     } 
     
+  //Function that allows to edit recipe
     @RequestMapping(value = "/edit/{id}")
     public String editRecipy(@PathVariable("id") Long recipyId, Model model) {
     	model.addAttribute("recipy", repository.findById(recipyId));

@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+//Creating user entitiy
 @Entity
 public class User {
 
@@ -14,7 +15,7 @@ public class User {
     @Column(name = "id", nullable = false, updatable = false)
     private Long id;
 
-    // Username with unique constraint
+
     @Column(name = "username", nullable = false, unique = true)
     private String username;
 

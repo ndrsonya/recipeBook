@@ -1,45 +1,49 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
-<title>Edit recipylist</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Edit recipe</title>
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css"
+	th:href="@{css/bootstrap.min.css}" />
 </head>
 <body>
+	<div class="col-md-4 col-md-offset-4">
 
-	<form th:object="${recipy}" th:action="@{../save}" action="#"
-		method="post">
+		<form th:object="${recipy}" th:action="@{../save}" action="#"
+			method="post" class="form-inline">
+<div>
+
+			<label for="title">Title<input type="hidden" id="id" th:field="*{id}" /> 
+			</label>
+			</div>
+			<input type="text" id="title" th:field="*{title}"class="form-control" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+			<label for="ingredients">Ingredients</label> <input type="text"
+				id="ingredients" th:field="*{ingredients}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+			<label for="description">Description</label> <input type="text"
+				th:field="*{description}" class="form-control" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+			<label for="instruction" >Instruction</label> <input type="text"
+				id="instruction" th:field="*{instruction}"class="form-control"/>
+			<div style="clear: both; display: block; height: 10px;"></div>
 
 
-		<input type="hidden" id="id" th:field="*{id}" /> 
-		
-		<label for="title">Title</label>
-		<input type="text" id="title" th:field="*{title}" />
-		<div style="clear: both; display: block; height: 10px;"></div>
 
-		<label for="ingredients">Ingredients</label> 
-		<input type="text" id="ingredients"
-			th:field="*{ingredients}" />
-		<div style="clear: both; display: block; height: 10px;"></div>
+			<label for="catlist">Category</label> <select id="catlist"
+				th:field="*{category}" class="form-control">
+				<option th:each="category: ${categories}"
+					th:value="${category.categoryid}" th:text="${category.name}" class="form-control"></option>
+			</select>
 
-		<label for="description">Description</label> 
-		<input type="text" th:field="*{description}" />
-		<div style="clear: both; display: block; height: 10px;"></div>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="submit" value="save" class="btn btn-primary" ></input>
+		</form>
 
-		<label for="instruction">Instruction</label> 
-		<input type="text" id="instruction"
-			th:field="*{instruction}" />
-		<div style="clear: both; display: block; height: 10px;"></div>
-
-	
-		
-		<label for="catlist">Category</label> 
-		<select id="catlist" th:field="*{category}" class="form-control">
-			<option th:each="category: ${categories}" th:value="${category.categoryid}" th:text="${category.name}"></option>
-		</select> 
-		
-		<div style="clear: both; display: block; height: 10px;"></div>
-		<input type="submit" class="btn btn-success" value="save"></input>
-	</form>
-
+		<div>
 </body>
 </html>

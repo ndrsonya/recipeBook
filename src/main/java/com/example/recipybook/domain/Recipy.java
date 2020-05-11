@@ -1,5 +1,6 @@
 package com.example.recipybook.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,6 +10,7 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+//Creating recipe entitiy
 @Entity
 public class Recipy {
 
@@ -16,8 +18,12 @@ public class Recipy {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String title;
+	
+	@Column( length = 1000 )
 	private String ingredients;
+	 @Column( length = 1000 )
 	private String description;
+	 @Column( length = 1000 )
 	private String instruction;
 
 	@ManyToOne
