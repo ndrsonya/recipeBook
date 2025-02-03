@@ -19,7 +19,7 @@ import com.example.recipybook.domain.*;
  */
 @RunWith(SpringRunner.class)
 @DataJpaTest
-public class JPAtest {
+public class JPATest {
 	@Autowired
 	private RecipyRepository repository;
 
