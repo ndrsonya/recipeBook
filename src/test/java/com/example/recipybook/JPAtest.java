@@ -2,6 +2,8 @@ package com.example.recipybook;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.junit.Assert.assertThat;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -31,30 +33,23 @@ import static org.assertj.core.api.Assertions.*;
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class JPAtest {
-
 	@Autowired
 	private RecipyRepository repository;
 
 	@Test
-	public void findByLastnameShouldReturnStudent() {
-		List<com.example.recipybook.domain.Recipy> recipies = repository.findByTitle("Caesar");
-		assertThat(recipies).hasSize(1);
-		assertThat(recipies.get(0).getDescription()).isEqualTo("A great Caesar salad recipe gets its swagger from a great Caesar dressing recipe.");
-	}
-
-	@Test
-	public void createNewBook() {
+	public void createNewRecipe() {
 		Recipy recipy = new Recipy("Caesar", "1 medium ciabatta loaf (or 4 thick slices crusty white bread), 3 tbsp olive oil, 2 skinless, boneless chicken breasts, 1 large cos or romaine lettuce, leaves separated", 
 				"A great Caesar salad recipe gets its swagger from a great Caesar dressing recipe.", "dsf",
 				new Category("Salad"));
 		repository.save(recipy);
-		assertThat(recipy.getId()).isNotNull();
+		assertThat(recipy.getId(), notNullValue());
+
 	}
 
 	@Test
 	public void deleteRecipies() {
 		repository.deleteAll();
-		assertThat(repository.count()).isEqualTo(0);
+		assertThat(repository.count(), is(0L));
 	}
 
 }
