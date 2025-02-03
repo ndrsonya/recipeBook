@@ -2,7 +2,7 @@
 
 ## Description
 
-**RecipyBook** is a Spring Boot-based web application designed as a school project for a server programming course. The project allows users to manage and view recipes in various categories like Salad, Soup, and Dessert. It supports basic CRUD (Create, Read, Update, Delete) operations for both categories and recipes and includes user authentication with roles (USER and ADMIN).
+**RecipyBook** is a Spring Boot-based web application designed as a school project for a server programming course. Built in 2019. Updated in 2025: Readme added, some minor issues resolved. The project allows users to manage and view recipes in various categories like Salad, Soup, and Dessert. It supports basic CRUD (Create, Read, Update, Delete) operations for both categories and recipes and includes user authentication with roles (USER and ADMIN).
 
 ## Features
 
